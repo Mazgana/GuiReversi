@@ -3,7 +3,12 @@ package reversi;
 import java.io.IOException;
 import java.util.List;
 
-public class GameFlow {
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+public class GameFlow extends GridPane {
 	
 	private Player blackPlayer;
 	private Player whitePlayer;
@@ -13,6 +18,34 @@ public class GameFlow {
 		this.blackPlayer = new Player(Status.BLACK);
 		this.whitePlayer = new Player(Status.WHITE);
 		this.board = new Board();
+		
+		FXMLLoader fxmlLoader = new
+				FXMLLoader(getClass().getResource("MazeBoard.fxml"));
+				fxmlLoader.setRoot(this);
+				fxmlLoader.setController(this);
+				try {
+					fxmlLoader.load();
+				} catch (IOException exception) {
+					throw new RuntimeException(exception);
+				}
+	}
+	
+	public void draw() {
+		this.getChildren().clear();
+		int height = (int)this.getPrefHeight();
+		int width = (int)this.getPrefWidth();
+		int cellHeight = height / this.board.getLength();
+		int cellWidth = width / this.board.getCellArr()[0].length;
+		for (int i = 0; i < this.board.getLength(); i++) {
+			for (int j = 0; j < this.board.getCellArr()[i].length; j++) {
+				if (this.board.getCellArr()[i][j].getStatus() == Status.BLACK)
+					this.add(new Rectangle(cellWidth, cellHeight, Color.BLACK), j, i);
+				else if (this.board.getCellArr()[i][j].getStatus() == Status.WHITE)
+					this.add(new Rectangle(cellWidth, cellHeight, Color.WHITE), j, i);
+				else
+					this.add(new Rectangle(cellWidth, cellHeight, Color.ORANGE), j, i);
+			}
+		}
 	}
 
 	public int playTurn(Player p, Board board) throws IOException {
