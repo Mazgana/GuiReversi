@@ -17,7 +17,7 @@ public class Player {
 		this.type = s;
 	}
 	
-	public Cell doTurn(List<Cell> options, int maxWidth, int maxLength) throws IOException {
+	public int[] doTurn(List<Cell> options, int maxWidth, int maxLength) throws IOException {
 	    int i;
 	    System.out.println(type.getValue() + ": It's your move.");
 	    System.out.println("your possible moves:");
@@ -70,12 +70,10 @@ public class Player {
 							}
 //						}
 	    	}
-	    Cell c = new Cell(x,y);//returning console choice
+	    int[] c = {x,y};//returning console choice
 	    return c;
 	}
 	
-	
-
 	public Status getChip() {
 	    return this.type;
 	}

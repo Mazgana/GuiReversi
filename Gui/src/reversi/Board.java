@@ -3,6 +3,8 @@ package reversi;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.layout.GridPane;
+
 public class Board {
 
 	static final int DEFAULT_WIDTH = 8;
@@ -12,6 +14,13 @@ public class Board {
 	private int length;
 	private Cell[][] CellArr;
 	private List<Cell> optionalMoves;
+	private GridPane grid; 
+	
+	private int blackScore = 0;
+	private int whiteScore = 0;
+	
+	private int cellHeight;
+	private int cellWidth;
 	
 	public Board(int wid, int len) {
 		this.width = wid;
@@ -19,7 +28,7 @@ public class Board {
 		
 		this.CellArr = new Cell[this.width + 1][this.length + 1];
 		this.optionalMoves = new ArrayList<Cell>();
-	}
+ 	}
 	
 	public Board() {
 		this.width = DEFAULT_WIDTH;
@@ -41,17 +50,13 @@ public class Board {
 		return this.CellArr;
 	}
 	
-	//copy constructor
-	public Board(Board b) {
-		this(b.getWidth(), b.getLength());
-		this.CellArr = b.getCellArr();
-	}
-	
 	public Cell getSpecificCell(int row, int col) {
 		return this.CellArr[row][col];
 	}
 	
-	public void initialize() {
+	public void initialize(GridPane gp) {
+		this.grid = gp;
+		
 		int i, j;
 		int x = this.width/2;
 		int y = this.length/2;
@@ -59,19 +64,21 @@ public class Board {
 		//initializing all clean cells
 		for (i = 0; i <= this.length ; i++) {
 			for (j = 0; j <= this.width; j++) {
-				CellArr[i][j] = new Cell(Status.EMPTY, i, j);
+				CellArr[i][j] = new Cell(Status.EMPTY, i, j, this.grid);
 			}
 		}
 		
+		int height = (int) this.grid.getPrefHeight();
+		int width = (int) this.grid.getPrefWidth();
+		
+		this.cellHeight = height / this.length;
+		this.cellWidth = width / this.CellArr[0].length;
+		
 		//putting first chips in middle of board
-		Cell whiteCell = new Cell(Status.WHITE, x, y);
-		CellArr[x][y] = whiteCell;
-		Cell whiteCell2 = new Cell(Status.WHITE, x + 1, y + 1);
-		CellArr[x + 1][y + 1] = whiteCell2;
-		Cell blackCell = new Cell(Status.BLACK, x, y + 1);
-		CellArr[x][y + 1] = blackCell;
-		Cell blackCell2 = new Cell(Status.BLACK, x + 1, y);
-		CellArr[x + 1][y] = blackCell2;
+		CellArr[x][y].setStatus(this.cellHeight, this.cellWidth, Status.WHITE);
+		CellArr[x + 1][y + 1].setStatus(this.cellHeight, this.cellWidth, Status.WHITE);
+		CellArr[x][y + 1].setStatus(this.cellHeight, this.cellWidth, Status.BLACK);
+		CellArr[x + 1][y].setStatus(this.cellHeight, this.cellWidth, Status.BLACK);
 	}
 
 	public Status reveal(int row, int col) {
@@ -80,7 +87,7 @@ public class Board {
 	
 	public void putChip(Status chip, int x, int y) {
 		//making move of putting chip and calling to flipping chips accordingly.
-	  CellArr[x][y].setStatus(chip);
+	  CellArr[x][y].setStatus(this.cellHeight, this.cellWidth, chip);
 		flipChips(chip, CellArr[x][y]);
 	}
 	
@@ -211,6 +218,16 @@ public class Board {
 	}
 	
 	public Status getWinner() {
+	    if (this.blackScore > this.whiteScore) {
+	        return  Status.BLACK;
+	    } else if (this.blackScore < this.whiteScore) {
+	        return  Status.WHITE;
+	    } else {
+	        return Status.EMPTY;
+	    	}
+	}
+	
+	public void calculateCurrentScore() {
 	    int xCount = 0, oCount = 0;
 	    for(int i = 0; i <= length; i++) {
 	        for (int j = 0; j <= width; j++) {
@@ -222,35 +239,8 @@ public class Board {
 				  	  	  	}
 					}
 	    } // going over board and counting
-	    if (xCount > oCount) {
-	        return  Status.BLACK;
-	    } else if (xCount < oCount) {
-	        return  Status.WHITE;
-	    } else {
-	        return Status.EMPTY;
-	    	}
-	}
-	
-	public void printBoard() {
-		int i, j, k;
-		for (i = 0; i <= this.length; i++) {//printing board in given format
-			for (j = 0; j <= this.width; j++) {
-				if ((i == 0) && (j == 0)){
-					System.out.print("  |");
-				} else if ((i == 0) && (j != 0)) {
-					System.out.print(" " + j + " |");
-				} else if ((j == 0) && (i != 0)) {
-					System.out.print(i + " |");
-				} else {
-					System.out.print(" " + this.getSpecificCell(i, j).getStatus().getValue() + " |");
-				}
-			}
-
-			System.out.println("");;
-			for (k = 0; k <= (this.width); k++) {
-				System.out.print("----");
-			}
-			System.out.println("");;
-		}
+	    
+	    this.blackScore = xCount;
+	    this.whiteScore = oCount;
 	}
 }
