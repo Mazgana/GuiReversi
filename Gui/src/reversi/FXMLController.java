@@ -12,14 +12,20 @@ public class FXMLController implements Initializable{
 
 	@FXML
 	private GridPane root;
-	private Board board = new Board();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		GameFlow game = new GameFlow(board);
-		game.setPrefWidth(400);
-		game.setPrefHeight(400);
+		GameFlow game = new GameFlow();
+		game.setPrefWidth(500);
+		game.setPrefHeight(500);
 		root.getChildren().add(0, game);
 		game.draw();
+		
+		try {
+			game.run();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

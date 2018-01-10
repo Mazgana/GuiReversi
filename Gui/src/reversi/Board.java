@@ -114,7 +114,7 @@ public class Board {
 	                    x = x - dx;
 	                    y = y - dy;
 	                    while (reveal(x, y) != player) {
-	                        CellArr[x][y].flip();
+	                        CellArr[x][y].flip(this.cellHeight, this.cellWidth);
 	                        x = x - dx;
 	                        y = y - dy;
 	                        if(x < 0 || x > length || y < 0 || y > width) return 0;
@@ -242,5 +242,27 @@ public class Board {
 	    
 	    this.blackScore = xCount;
 	    this.whiteScore = oCount;
+	}
+	
+	public int[] locationOfPoint(double x, double y) {
+		int i, j;
+		
+		int increasingRow = this.cellWidth;
+		int increasingCol = this.cellHeight;
+		
+		//finding the point's row
+		for (i = 1; i < this.length; i++) {
+			if (y < (i * increasingRow))
+				break;
+		}
+		
+		//finding the point's col
+		for (j = 1; j < this.width; j++) {
+			if (x < (j * increasingCol))
+				break;
+		}
+		
+		int[] location = {i, j};
+		return location;
 	}
 }

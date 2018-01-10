@@ -77,15 +77,21 @@ public class Cell {
 		this.cellStatus = s;
 	}
 	
-	public void flip() {
+	public void flip(int cellHeight, int cellWidth) {
 		  if (this.cellStatus == Status.BLACK) {
-			  this.cellStatus = Status.WHITE;
 			  this.grid.getChildren().remove(this.ivBlack);
+				this.ivWhite.setFitHeight(cellHeight);
+				this.ivWhite.setFitWidth(cellWidth);
 			  this.grid.add(this.ivWhite, this.col, this.row);
+			  
+			  this.cellStatus = Status.WHITE;
 		  } else if (this.cellStatus == Status.WHITE) {
-			  this.cellStatus = Status.BLACK;
 			  this.grid.getChildren().remove(this.ivWhite);
+				this.ivBlack.setFitHeight(cellHeight);
+				this.ivBlack.setFitWidth(cellWidth);
 			  this.grid.add(this.ivBlack, this.col, this.row);
+			  
+			  this.cellStatus = Status.BLACK;
 		  }
 	}
 	
