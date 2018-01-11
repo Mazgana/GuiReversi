@@ -87,39 +87,43 @@ public class GameFlow extends GridPane {
 		  this.board.initialize(this);
 		  
 			this.setOnMouseClicked(event -> {
-				int played = 0;
-				int last = 1;
 				this.x = event.getX();
 				this.y = event.getY();
 				event.consume();
-				
-				try {
-					played = playTurn(this.curr, this.board);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				if ((played == 0 && last == 0) || this.board.isBoardFull())
-					try {
-						endGame();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				
-				last = played;
-				
-				if (played == 1) {
-					if (this.curr.getChip() == Status.BLACK)
-						this.curr = this.whitePlayer;
-					else
-						this.curr = this.blackPlayer;
-				}
-				
-				this.board.calculateCurrentScore();
-				played = 0;
+				playTurn();
 			});
 	}
 
+	public void playTurn() {
+		int played = 0;
+		int last = 1;
+		
+		try {
+			played = playTurn(this.curr, this.board);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if ((played == 0 && last == 0) || this.board.isBoardFull())
+			try {
+				endGame();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		last = played;
+		
+		if (played == 1) {
+			if (this.curr.getChip() == Status.BLACK)
+				this.curr = this.whitePlayer;
+			else
+				this.curr = this.blackPlayer;
+		}
+		
+		this.board.calculateCurrentScore();
+		played = 0;		
+	}
+	
 	//ending game and declaring winner.
 	public void endGame() throws IOException {
 		//ending game and announcing winner
