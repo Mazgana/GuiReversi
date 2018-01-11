@@ -26,6 +26,7 @@ public class Cell {
 	private GridPane grid;
 	private ImageView ivWhite;
 	private ImageView ivBlack;
+	private ImageView ivEmpty;
 	
 	public Cell(GridPane gp) {
 		this.cellStatus = Status.EMPTY;
@@ -35,46 +36,57 @@ public class Cell {
 	}
 	
 	public Cell(Status s, int r, int c, GridPane gp) {
-		this.cellStatus = s;
-		this.row = r;
-		this.col = c;
-		this.grid = gp;
-		
-		this.ivWhite = new ImageView(getClass().getResource("white.png").toExternalForm());
-		this.ivBlack = new ImageView(getClass().getResource("blue.png").toExternalForm());
+			this.cellStatus = s;
+			this.row = r;
+			this.col = c;
+			this.grid = gp;
+			
+			this.ivWhite = new ImageView(getClass().getResource("white.PNG").toExternalForm());
+			this.ivBlack = new ImageView(getClass().getResource("black.PNG").toExternalForm());
+			this.ivEmpty = new ImageView(getClass().getResource("empty.PNG").toExternalForm());
 	}
 	
 	public Cell(int r, int c, GridPane gp) {
-		this.cellStatus = Status.EMPTY;
-		this.row = r;
-		this.col = c;
-		this.grid = gp;
+			this.cellStatus = Status.EMPTY;
+			this.row = r;
+			this.col = c;
+			this.grid = gp;
 	}
 	
 	public Status getStatus() {
-		return this.cellStatus;
+			return this.cellStatus;
 	}
 	
 	public int getRow() {
-		return this.row;
+			return this.row;
 	}
 	
 	public int getCol() {
-		return this.col;
+			return this.col;
 	}
 	
 	public void setStatus(int cellHeight, int cellWidth, Status s) {
-		if (s == Status.WHITE) {
-			this.ivWhite.setFitHeight(cellHeight);
-			this.ivWhite.setFitWidth(cellWidth);
-			this.grid.add(this.ivWhite, this.col, this.row);
-		} else if (s == Status.BLACK) {
-			this.ivBlack.setFitHeight(cellHeight);
-			this.ivBlack.setFitWidth(cellWidth);
-			this.grid.add(this.ivBlack, this.col, this.row);
-		}
+			if (s == Status.EMPTY) {
+				this.ivEmpty.setFitHeight(cellHeight);
+				this.ivEmpty.setFitWidth(cellWidth);
+				this.grid.add(this.ivEmpty, this.col, this.row);
+				
+				return;
+			}
 		
-		this.cellStatus = s;
+			this.grid.getChildren().remove(this.ivEmpty);
+			
+			if (s == Status.WHITE) {
+				this.ivWhite.setFitHeight(cellHeight);
+				this.ivWhite.setFitWidth(cellWidth);
+				this.grid.add(this.ivWhite, this.col, this.row);
+			} else if (s == Status.BLACK) {
+				this.ivBlack.setFitHeight(cellHeight);
+				this.ivBlack.setFitWidth(cellWidth);
+				this.grid.add(this.ivBlack, this.col, this.row);
+			}
+			
+			this.cellStatus = s;
 	}
 	
 	public void flip(int cellHeight, int cellWidth) {

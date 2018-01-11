@@ -7,8 +7,8 @@ import javafx.scene.layout.GridPane;
 
 public class Board {
 
-	static final int DEFAULT_WIDTH = 8;
-	static final int DEFAULT_LEGTH = 8;
+	static final int DEFAULT_WIDTH = 4;
+	static final int DEFAULT_LEGTH = 4;
 	
 	private int width;
 	private int length;
@@ -54,25 +54,42 @@ public class Board {
 		return this.CellArr[row][col];
 	}
 	
+	public int getBlackScore() {
+		return this.blackScore;
+	}
+	
+	public int getWhiteScore() {
+		return this.whiteScore;
+	}
+	
 	public void initialize(GridPane gp) {
 		this.grid = gp;
 		
 		int i, j;
 		int x = this.width/2;
 		int y = this.length/2;
-				
-		//initializing all clean cells
-		for (i = 0; i <= this.length ; i++) {
-			for (j = 0; j <= this.width; j++) {
-				CellArr[i][j] = new Cell(Status.EMPTY, i, j, this.grid);
-			}
-		}
 		
 		int height = (int) this.grid.getPrefHeight();
 		int width = (int) this.grid.getPrefWidth();
 		
 		this.cellHeight = height / this.length;
 		this.cellWidth = width / this.CellArr[0].length;
+		
+		for (i = 0; i <= this.length; i++) {
+			CellArr[i][0] = new Cell(Status.EMPTY, i, 0, this.grid);
+		}
+		
+		for (i = 0; i <= this.width; i++) {
+			CellArr[0][i] = new Cell(Status.EMPTY, 0, i, this.grid);
+		}
+		
+		//initializing all clean cells
+		for (i = 1; i <= this.length ; i++) {
+			for (j = 1; j <= this.width; j++) {
+				CellArr[i][j] = new Cell(Status.EMPTY, i, j, this.grid);
+				CellArr[i][j].setStatus(this.cellHeight, this.cellWidth, Status.EMPTY);
+			}
+		}
 		
 		//putting first chips in middle of board
 		CellArr[x][y].setStatus(this.cellHeight, this.cellWidth, Status.WHITE);
@@ -218,6 +235,7 @@ public class Board {
 	}
 	
 	public Status getWinner() {
+		calculateCurrentScore();
 	    if (this.blackScore > this.whiteScore) {
 	        return  Status.BLACK;
 	    } else if (this.blackScore < this.whiteScore) {
@@ -247,18 +265,18 @@ public class Board {
 	public int[] locationOfPoint(double x, double y) {
 		int i, j;
 		
-		int increasingRow = this.cellWidth;
-		int increasingCol = this.cellHeight;
+		int increasingRow = this.cellHeight;
+		int increasingCol = this.cellWidth;
 		
 		//finding the point's row
-		for (i = 1; i < this.length; i++) {
-			if (y < (i * increasingRow))
+		for (i = 1; i <= this.length; i++) {
+			if ((int) y <= (i * increasingRow))
 				break;
 		}
 		
 		//finding the point's col
-		for (j = 1; j < this.width; j++) {
-			if (x < (j * increasingCol))
+		for (j = 1; j <= this.width; j++) {
+			if ((int) x <= (j * increasingCol))
 				break;
 		}
 		

@@ -4,21 +4,21 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class GameFlow extends GridPane {
-	
+
 	private Player blackPlayer;
 	private Player whitePlayer;
 	private Player curr;
 	
 	private Board board;
 	
-	private double x = 10000;
-	private double y = 10000;
-	private boolean valid = false;
+	private double x;
+	private double y;
 	
 	private Cell chosen = null;
 	
@@ -42,19 +42,6 @@ public class GameFlow extends GridPane {
 	
 	public void draw() {
 		this.getChildren().clear();
-		
-		int height = (int)this.getPrefHeight();
-		int width = (int)this.getPrefWidth();
-		int cellHeight = height / this.board.getLength();
-		int cellWidth = width / this.board.getCellArr()[0].length;
-		
-		for (int i = 1; i <= this.board.getLength(); i++) {
-			for (int j = 1; j <= this.board.getWidth(); j++) {
-					Rectangle rec2 = new Rectangle(cellWidth, cellHeight, Color.PALEGREEN);
-					rec2.setStroke(Color.BLACK);
-					this.add(rec2, j, i);
-			}
-		}
 	}
 
 	public int playTurn(Player p, Board board) throws IOException {
@@ -68,19 +55,16 @@ public class GameFlow extends GridPane {
 	        return 0;
 	    }//no moves can be done, turn passes to other player
 	    
-
-					
-				    int[] coordinates = board.locationOfPoint(this.x, this.y);
-				    this.chosen = new Cell(coordinates[0], coordinates[1], this);
+	    int[] coordinates = board.locationOfPoint(this.x, this.y);
+	    this.chosen = new Cell(coordinates[0], coordinates[1], this);
 				    
-				    //validate that coordinate is an option
-				    if (!board.isCellInOptionArray(this.chosen))
-				    	this.valid = false;
-				    else  {
-					    board.putChip(p.getChip(), chosen.getRow(), chosen.getCol());// putting chip on board and flipping chips accordingly
-					    board.cleanOptionalMovesList();
-				    	}
-
+	    //validate that coordinate is an option
+	    if (!board.isCellInOptionArray(this.chosen)) {
+		    	return 2;
+	    } else  {
+			    board.putChip(p.getChip(), chosen.getRow(), chosen.getCol());// putting chip on board and flipping chips accordingly
+			    board.cleanOptionalMovesList();
+	    	}
 				
 	    return 1;
 	}
@@ -95,17 +79,16 @@ public class GameFlow extends GridPane {
 
 	//runs basic game loop.
 	public void run() throws IOException {
-		System.out.println("Welcome to Reversi!");
+		this.add(new Text("Curren player: " + this.curr.getChip()), this.board.getWidth() + 1, 1);
+		this.add(new Text("Black player score: " + this.board.getBlackScore()), this.board.getWidth() + 1, 2);
+		this.add(new Text("White player score: " + this.board.getWhiteScore()), this.board.getWidth() + 1, 3);
 		
 		//initializing board and starting.
-	    int oPlayed = 1, xPlayed;
-	    boolean closed = false;
 		  this.board.initialize(this);
 		  
-	    //playing game, 1 round per player.
-//	    while (!board.isBoardFull()) {
 			this.setOnMouseClicked(event -> {
 				int played = 0;
+				int last = 1;
 				this.x = event.getX();
 				this.y = event.getY();
 				event.consume();
@@ -116,7 +99,14 @@ public class GameFlow extends GridPane {
 					e.printStackTrace();
 				}
 				
-				System.out.println(played);
+				if ((played == 0 && last == 0) || this.board.isBoardFull())
+					try {
+						endGame();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
+				last = played;
 				
 				if (played == 1) {
 					if (this.curr.getChip() == Status.BLACK)
@@ -125,52 +115,32 @@ public class GameFlow extends GridPane {
 						this.curr = this.blackPlayer;
 				}
 				
+				this.board.calculateCurrentScore();
 				played = 0;
-				
 			});
-//	        xPlayed = playTurn(this.getBlackPlayer(), this.board);
-//	        if (xPlayed == 0 && oPlayed == 0) {
-//	            //when no more moves can be done.
-//	            break;
-//	        } else if (xPlayed == 2) {
-//	        	//X closed the game
-//	        	closed = true;
-//	        	break;
-//	        		}
-//
-//	        oPlayed = playTurn(this.getWhitePlayer(), this.board);
-//	        if (xPlayed == 0 && oPlayed == 0) {
-//	        	//when no more moves can be done.
-//	        	break;
-//	        } else if (oPlayed == 2) {
-//	        	//O closed the game
-//	        	closed = true;
-//	        	break;
-//	        		}
-//	    	}
-//
-//			if (closed) {
-//				endGame(2); // One of the players closed the game
-//			} else {
-//				endGame(1); // The game ended
-//			}
 	}
 
 	//ending game and declaring winner.
-	public void endGame(int cause) throws IOException {
-		    //ending game and announcing winner
-				if (cause == 1) {
-					 System.out.println("GAME ENDED!");
-				}
+	public void endGame() throws IOException {
+		//ending game and announcing winner
 
-		    Status winner = board.getWinner();
-		    if(winner == Status.EMPTY) {
-		    	System.out.println("It's a tie!");
-		    	}
-		    else {
-		    	System.out.println("Player " + winner.toString() + " wins!");
-		    	}
-
-			run();
+		Alert alert = new Alert(AlertType.NONE);
+		alert.setHeaderText("GAME ENDED!");
+		
+		Status winner = board.getWinner();
+		if(winner == Status.EMPTY) {
+				alert.setContentText("It's a tie!");
+		} else {
+				alert.setContentText("Player " + winner.toString() + " wins!");
+		}
+		
+		if(winner == Status.EMPTY) {
+			System.out.println("It's a tie!");
+		} else {
+			System.out.println("Player " + winner.toString() + " wins!");
+		}
+		
+//		alert.showAndWait();
+//		alert.close();
 	}
 }
