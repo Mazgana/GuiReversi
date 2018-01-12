@@ -4,5 +4,5 @@
 	
 <GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="reversi.FXMLController"
 					fx:id = "root">
-	<!-- TODO Add Nodes -->
 </GridPane>
+

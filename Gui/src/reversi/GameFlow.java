@@ -3,13 +3,18 @@ package reversi;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class GameFlow extends GridPane {
+	
+	@FXML
+	Label scores;
 
 	private Player blackPlayer;
 	private Player whitePlayer;
@@ -49,8 +54,8 @@ public class GameFlow extends GridPane {
 	    
 	    if (options.isEmpty()) {
 		    	System.out.println(p.getChip().toString() + ": you have got no moves.");
-		    	System.out.println("press enter to continue..");
-		    	System.in.read();
+//		    	System.out.println("press enter to continue..");
+//		    	System.in.read();
 
 	        return 0;
 	    }//no moves can be done, turn passes to other player
@@ -113,7 +118,7 @@ public class GameFlow extends GridPane {
 		
 		last = played;
 		
-		if (played == 1) {
+		if (played != 2) {
 			if (this.curr.getChip() == Status.BLACK)
 				this.curr = this.whitePlayer;
 			else
