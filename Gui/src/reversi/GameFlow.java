@@ -27,12 +27,15 @@ public class GameFlow extends GridPane {
 	
 	private Cell chosen = null;
 	
+	private Text current;
+	
 	public GameFlow() {
 		this.board = new Board();
 		this.blackPlayer = new Player(Status.BLACK);
 		this.whitePlayer = new Player(Status.WHITE);
 		
 		this.curr = this.blackPlayer;
+		this.current = new Text("Current playe: " + this.curr);
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameFlow.fxml"));
 		fxmlLoader.setRoot(this);
@@ -46,7 +49,7 @@ public class GameFlow extends GridPane {
 	}
 	
 	public void draw() {
-		this.getChildren().clear();
+		
 	}
 
 	public int playTurn(Player p, Board board) throws IOException {
@@ -54,8 +57,6 @@ public class GameFlow extends GridPane {
 	    
 	    if (options.isEmpty()) {
 		    	System.out.println(p.getChip().toString() + ": you have got no moves.");
-//		    	System.out.println("press enter to continue..");
-//		    	System.in.read();
 
 	        return 0;
 	    }//no moves can be done, turn passes to other player
@@ -84,9 +85,6 @@ public class GameFlow extends GridPane {
 
 	//runs basic game loop.
 	public void run() throws IOException {
-		this.add(new Text("Curren player: " + this.curr.getChip()), this.board.getWidth() + 1, 1);
-		this.add(new Text("Black player score: " + this.board.getBlackScore()), this.board.getWidth() + 1, 2);
-		this.add(new Text("White player score: " + this.board.getWhiteScore()), this.board.getWidth() + 1, 3);
 		
 		//initializing board and starting.
 		  this.board.initialize(this);
@@ -96,6 +94,14 @@ public class GameFlow extends GridPane {
 				this.y = event.getY();
 				event.consume();
 				playTurn();
+				
+				this.getChildren().remove(current);
+				this.add(current, this.board.getWidth() + 1, 1);
+				this.board.draw();
+				
+				this.current.setText("Current player: " + this.curr.getChip());
+				
+				
 			});
 	}
 
