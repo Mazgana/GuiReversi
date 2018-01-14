@@ -23,8 +23,6 @@ public class FXMLController implements Initializable{
 		this.game.setPrefHeight(500);
 		root.getChildren().add(this.game);
 		
-//		this.game.draw();
-		
 		try {
 			this.game.run();
 		} catch (IOException e) {

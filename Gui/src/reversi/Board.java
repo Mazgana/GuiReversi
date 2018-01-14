@@ -116,6 +116,8 @@ public class Board {
 		//making move of putting chip and calling to flipping chips accordingly.
 	  CellArr[x][y].setStatus(this.cellHeight, this.cellWidth, chip);
 		flipChips(chip, CellArr[x][y]);
+		this.optionalMoves.remove(CellArr[x][y]);
+		calculateCurrentScore();
 	}
 	
 	public int doOneWay(Status player, int x, int dx, int y, int dy, boolean flip) {
@@ -165,51 +167,70 @@ public class Board {
     doOneWay(playerColr, chosen.getRow(), 0, chosen.getCol(), -1, true);
 	}
 	
-	public List<Cell> getOptions(Status player) {
-		List<Cell> options = new ArrayList<Cell>();
-
+	public List<Cell> getOptions() {
+		return this.optionalMoves;
+	}
+	
+	public void updateOptionalMovesList(Status s) {
+		cleanOptionalMovesList();
+		calculateOptions(s);
+		turnOptional();
+	}
+	
+	public void turnOptional() {
+		for (int i = 0; i < this.optionalMoves.size(); i++)
+			this.optionalMoves.get(i).setStatus(this.cellHeight, this.cellWidth, Status.OPTIONAL);
+	}
+	
+	public void calculateOptions(Status player) {
 		// loop over board finding valid cells.
 	    for(int i = 1; i <= length; i++) {
 	        for (int j = 1; j <= width; j++) {
 	            if (CellArr[i][j].getStatus() == Status.EMPTY) {
 	                if (doOneWay(player, i, -1, j, 0, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                    optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check North
 	                if (doOneWay(player, i, 1, j, 0, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                		optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check South
 	                if (doOneWay(player, i, 0, j,-1, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                		optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check West
 	                if (doOneWay(player, i, 0, j, 1, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                		optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check East
 	                if (doOneWay(player, i, -1, j,-1, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                		optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check NE
 	                if (doOneWay(player, i, 1, j, 1, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                		optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check SE
 	                if (doOneWay(player, i, 1, j,-1, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                		optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check SW
 	                if (doOneWay(player, i, -1, j, 1, false) != 0) {
-	                	if (!isCellInOptionArray(CellArr[i][j]))
+	                	if (!isCellInOptionArray(CellArr[i][j])) {
 	                		optionalMoves.add(CellArr[i][j]);
+	                					}
 	                }// check NE
 	            }
 	        }
 	    }
-	    options = optionalMoves;
-	    return options;
-	}
+}
 	
 	public boolean isCellInOptionArray(Cell check) {
     int i;
@@ -227,7 +248,10 @@ public class Board {
 	}
 	
 	public void cleanOptionalMovesList(){
-			optionalMoves.clear();
+		for (int i = 0; i < this.optionalMoves.size(); i++) {
+			this.optionalMoves.get(i).setStatus(this.cellHeight, this.cellWidth, Status.EMPTY);
+		}
+			this.optionalMoves.clear();
 	}
 	
 	
@@ -235,7 +259,7 @@ public class Board {
 		int i, j;
 		for (i = 1; i <= length; i++) {//checking in all cells contain chips.
 			for (j = 1; j <= width; j++) {
-				if (CellArr[i][j].getStatus() == Status.EMPTY) {
+				if (CellArr[i][j].getStatus() == Status.EMPTY || CellArr[i][j].getStatus() == Status.OPTIONAL) {
 					return false;
 				}
 			}

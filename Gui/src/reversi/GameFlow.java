@@ -53,14 +53,6 @@ public class GameFlow extends GridPane {
 	}
 
 	public int playTurn(Player p, Board board) throws IOException {
-	    List<Cell> options = board.getOptions(p.getChip());
-	    
-	    if (options.isEmpty()) {
-		    	System.out.println(p.getChip().toString() + ": you have got no moves.");
-
-	        return 0;
-	    }//no moves can be done, turn passes to other player
-	    
 	    int[] coordinates = board.locationOfPoint(this.x, this.y);
 	    this.chosen = new Cell(coordinates[0], coordinates[1], this);
 				    
@@ -69,7 +61,6 @@ public class GameFlow extends GridPane {
 		    	return 2;
 	    } else  {
 			    board.putChip(p.getChip(), chosen.getRow(), chosen.getCol());// putting chip on board and flipping chips accordingly
-			    board.cleanOptionalMovesList();
 	    	}
 				
 	    return 1;
@@ -89,25 +80,28 @@ public class GameFlow extends GridPane {
 		//initializing board and starting.
 		  this.board.initialize(this);
 		  
+		  this.board.updateOptionalMovesList(this.curr.getChip());
+		  
 			this.setOnMouseClicked(event -> {
 				this.x = event.getX();
 				this.y = event.getY();
 				event.consume();
-				playTurn();
+				try {
+					playOneTurn();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
-				this.getChildren().remove(current);
-				this.add(current, this.board.getWidth() + 1, 1);
-				this.board.draw();
-				
-				this.current.setText("Current player: " + this.curr.getChip());
-				
-				
+//				this.getChildren().remove(current);
+//				this.add(current, this.board.getWidth() + 1, 1);
+//				this.board.draw();
+//				
+//				this.current.setText("Current player: " + this.curr.getChip());
 			});
 	}
 
-	public void playTurn() {
+	public void playOneTurn() throws IOException {
 		int played = 0;
-		int last = 1;
 		
 		try {
 			played = playTurn(this.curr, this.board);
@@ -115,24 +109,24 @@ public class GameFlow extends GridPane {
 			e.printStackTrace();
 		}
 		
-		if ((played == 0 && last == 0) || this.board.isBoardFull())
-			try {
+		if (this.board.isBoardFull())
 				endGame();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		
-		last = played;
 		
 		if (played != 2) {
-			if (this.curr.getChip() == Status.BLACK)
-				this.curr = this.whitePlayer;
-			else
-				this.curr = this.blackPlayer;
+			this.board.updateOptionalMovesList(this.curr.getOppositeType());
+			if (this.board.getOptions().size() == 0) { //the next player has no moves
+				this.board.updateOptionalMovesList(this.curr.getChip()); //both players have moves
+				if (this.board.getOptions().size() == 0)
+					endGame();
+			} else {
+				if (this.curr.getChip() == Status.BLACK) { //changing current player
+					this.curr = this.whitePlayer;
+				}
+				else {
+					this.curr = this.blackPlayer;
+				}
+			}
 		}
-		
-		this.board.calculateCurrentScore();
-		played = 0;		
 	}
 	
 	//ending game and declaring winner.

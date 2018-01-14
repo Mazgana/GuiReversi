@@ -6,7 +6,8 @@ import javafx.scene.layout.GridPane;
 enum Status {
 	BLACK("X"),
 	WHITE("O"), 
-	EMPTY(" ");
+	EMPTY(" "),
+	OPTIONAL("P");
 
 	private String stat;
 	
@@ -27,6 +28,7 @@ public class Cell {
 	private ImageView ivWhite;
 	private ImageView ivBlack;
 	private ImageView ivEmpty;
+	private ImageView ivOptional;
 	
 	public Cell(GridPane gp) {
 		this.cellStatus = Status.EMPTY;
@@ -44,6 +46,7 @@ public class Cell {
 			this.ivWhite = new ImageView(getClass().getResource("white.PNG").toExternalForm());
 			this.ivBlack = new ImageView(getClass().getResource("black.PNG").toExternalForm());
 			this.ivEmpty = new ImageView(getClass().getResource("empty.PNG").toExternalForm());
+			this.ivOptional = new ImageView(getClass().getResource("option.PNG").toExternalForm());
 	}
 	
 	public Cell(int r, int c, GridPane gp) {
@@ -67,23 +70,27 @@ public class Cell {
 	
 	public void setStatus(int cellHeight, int cellWidth, Status s) {
 			if (s == Status.EMPTY) {
+				this.grid.getChildren().remove(this.ivOptional);
 				this.ivEmpty.setFitHeight(cellHeight);
 				this.ivEmpty.setFitWidth(cellWidth);
 				this.grid.add(this.ivEmpty, this.col, this.row);
 				
-				return;
-			}
-		
-			this.grid.getChildren().remove(this.ivEmpty);
-			
-			if (s == Status.WHITE) {
-				this.ivWhite.setFitHeight(cellHeight);
-				this.ivWhite.setFitWidth(cellWidth);
-				this.grid.add(this.ivWhite, this.col, this.row);
-			} else if (s == Status.BLACK) {
-				this.ivBlack.setFitHeight(cellHeight);
-				this.ivBlack.setFitWidth(cellWidth);
-				this.grid.add(this.ivBlack, this.col, this.row);
+			} else {
+				this.grid.getChildren().remove(this.ivEmpty);
+				
+				if (s == Status.OPTIONAL) {
+					this.ivOptional.setFitHeight(cellHeight);
+					this.ivOptional.setFitWidth(cellWidth);
+					this.grid.add(this.ivOptional, this.col, this.row);
+				} else	if (s == Status.WHITE) {
+					this.ivWhite.setFitHeight(cellHeight);
+					this.ivWhite.setFitWidth(cellWidth);
+					this.grid.add(this.ivWhite, this.col, this.row);
+				} else if (s == Status.BLACK) {
+					this.ivBlack.setFitHeight(cellHeight);
+					this.ivBlack.setFitWidth(cellWidth);
+					this.grid.add(this.ivBlack, this.col, this.row);
+				}
 			}
 			
 			this.cellStatus = s;
