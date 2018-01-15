@@ -1,8 +1,6 @@
 package reversi;
 
 import java.io.IOException;
-
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
@@ -30,16 +28,6 @@ public class GameFlow extends GridPane {
 		
 		this.curr = this.blackPlayer;
 		this.scores = new Text("");
-		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameFlow.fxml"));
-		fxmlLoader.setRoot(this);
-		fxmlLoader.setController(this);
-		
-		try {
-				fxmlLoader.load();
-		} catch (IOException exception) {
-				throw new RuntimeException(exception);
-		}
 	}
 
 	public int playTurn(Player p, Board board) throws IOException {

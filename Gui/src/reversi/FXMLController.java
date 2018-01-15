@@ -6,12 +6,12 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class FXMLController implements Initializable{
 
 	@FXML
-	private GridPane root;
+	private HBox root;
 	
 	@FXML
 	private GameFlow game;
