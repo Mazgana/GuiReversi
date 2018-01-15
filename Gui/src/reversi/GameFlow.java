@@ -21,10 +21,7 @@ public class GameFlow extends GridPane {
 	
 	private Cell chosen = null;
 	
-	private Text current;
-	
-	private Text black;
-	private Text white;
+	private Text scores;
 	
 	public GameFlow() {
 		this.board = new Board();
@@ -32,10 +29,7 @@ public class GameFlow extends GridPane {
 		this.whitePlayer = new Player(Status.WHITE);
 		
 		this.curr = this.blackPlayer;
-		this.current = new Text("Current playe: " + this.curr);
-		
-		this.black = new Text("Black score: " + this.board.getBlackScore());
-		this.white = new Text("White score: " + this.board.getWhiteScore());
+		this.scores = new Text("Current playe: " + this.curr + "\nBlack score: " + this.board.getBlackScore() + "\nWhite score: " + this.board.getWhiteScore());
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameFlow.fxml"));
 		fxmlLoader.setRoot(this);
@@ -46,10 +40,6 @@ public class GameFlow extends GridPane {
 		} catch (IOException exception) {
 				throw new RuntimeException(exception);
 		}
-	}
-	
-	public void draw() {
-		
 	}
 
 	public int playTurn(Player p, Board board) throws IOException {
@@ -76,9 +66,9 @@ public class GameFlow extends GridPane {
 
 	//runs basic game loop.
 	public void run() throws IOException {
-		
 		//initializing board and starting.
 		  this.board.initialize(this);
+		  showScores();
 		  
 		  this.board.updateOptionalMovesList(this.curr.getChip());
 		  
@@ -150,18 +140,8 @@ public class GameFlow extends GridPane {
 	}
 	
 	public void showScores() {
-		this.getChildren().remove(current);
-		this.add(current, this.board.getWidth() + 1, 1);
-		this.current.setText("Current player: " + this.curr.getChip());
-
-		this.getChildren().remove(this.black);
-		this.add(this.black, this.board.getWidth() + 1, 2);
-		
-		this.getChildren().remove(this.white);
-		this.add(this.white, this.board.getWidth() + 1, 3);
-		
-		this.black.setText("Black score: " + this.board.getBlackScore());
-		this.white.setText("White score: " + this.board.getWhiteScore());
-		
+		this.getChildren().remove(this.scores);
+		this.add(this.scores, this.board.getWidth() + 1, 1);
+		this.scores.setText("Current player: " + this.curr.getChip() + "\nBlack score: " + this.board.getBlackScore() + "\nWhite score: " + this.board.getWhiteScore());
 	}
 }
