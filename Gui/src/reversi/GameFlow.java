@@ -29,7 +29,7 @@ public class GameFlow extends GridPane {
 		this.whitePlayer = new Player(Status.WHITE);
 		
 		this.curr = this.blackPlayer;
-		this.scores = new Text("Current playe: " + this.curr + "\nBlack score: " + this.board.getBlackScore() + "\nWhite score: " + this.board.getWhiteScore());
+		this.scores = new Text("");
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameFlow.fxml"));
 		fxmlLoader.setRoot(this);
@@ -135,13 +135,13 @@ public class GameFlow extends GridPane {
 			System.out.println("Player " + winner.toString() + " wins!");
 		}
 		
-//		alert.showAndWait();
+		alert.showAndWait();
 //		alert.close();
 	}
 	
 	public void showScores() {
 		this.getChildren().remove(this.scores);
-		this.add(this.scores, this.board.getWidth() + 1, 1);
-		this.scores.setText("Current player: " + this.curr.getChip() + "\nBlack score: " + this.board.getBlackScore() + "\nWhite score: " + this.board.getWhiteScore());
+		this.add(this.scores, this.board.getWidth() + 1, 1,this.board.getWidth() + 2, 5);
+		this.scores.setText("Current player: " + this.curr.getChip() + "\nBlack player score: " + this.board.getBlackScore() + "\nWhite player score: " + this.board.getWhiteScore());
 	}
 }
