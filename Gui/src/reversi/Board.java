@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 
 public class Board {
 
-	static final int DEFAULT_WIDTH = 4;
-	static final int DEFAULT_LEGTH = 4;
+	static final int DEFAULT_WIDTH = 8;
+	static final int DEFAULT_LEGTH = 8;
 	
 	private int width;
 	private int length;
@@ -23,18 +22,12 @@ public class Board {
 	private int cellHeight;
 	private int cellWidth;
 	
-	private Text black;
-	private Text white;
-	
 	public Board(int wid, int len) {
 		this.width = wid;
 		this.length = len;
 		
 		this.CellArr = new Cell[this.width + 1][this.length + 1];
 		this.optionalMoves = new ArrayList<Cell>();
-		
-		this.black = new Text("Black score: " + this.blackScore);
-		this.white = new Text("White score: " + this.whiteScore);
  	}
 	
 	public Board() {
@@ -43,9 +36,6 @@ public class Board {
 		
 		this.CellArr = new Cell[this.width + 1][this.length + 1];
 		this.optionalMoves = new ArrayList<Cell>();
-		
-		this.black = new Text("Black score: " + this.blackScore);
-		this.white = new Text("White score: " + this.whiteScore);
 	}
 	
 	public int getWidth() {
@@ -316,16 +306,5 @@ public class Board {
 		
 		int[] location = {i, j};
 		return location;
-	}
-	
-	public void draw() {
-		this.grid.getChildren().remove(this.black);
-		this.grid.add(this.black, this.width + 1, 2);
-		
-		this.grid.getChildren().remove(this.white);
-		this.grid.add(this.white, this.width + 1, 3);
-		
-		this.black.setText("Black score: " + this.blackScore);
-		this.white.setText("White score: " + this.whiteScore);
 	}
 }

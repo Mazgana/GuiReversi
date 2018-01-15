@@ -1,21 +1,15 @@
 package reversi;
 
 import java.io.IOException;
-import java.util.List;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class GameFlow extends GridPane {
 	
-	@FXML
-	Label scores;
-
 	private Player blackPlayer;
 	private Player whitePlayer;
 	private Player curr;
@@ -29,6 +23,9 @@ public class GameFlow extends GridPane {
 	
 	private Text current;
 	
+	private Text black;
+	private Text white;
+	
 	public GameFlow() {
 		this.board = new Board();
 		this.blackPlayer = new Player(Status.BLACK);
@@ -36,6 +33,9 @@ public class GameFlow extends GridPane {
 		
 		this.curr = this.blackPlayer;
 		this.current = new Text("Current playe: " + this.curr);
+		
+		this.black = new Text("Black score: " + this.board.getBlackScore());
+		this.white = new Text("White score: " + this.board.getWhiteScore());
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameFlow.fxml"));
 		fxmlLoader.setRoot(this);
@@ -91,12 +91,8 @@ public class GameFlow extends GridPane {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
-//				this.getChildren().remove(current);
-//				this.add(current, this.board.getWidth() + 1, 1);
-//				this.board.draw();
-//				
-//				this.current.setText("Current player: " + this.curr.getChip());
+				showScores();
+
 			});
 	}
 
@@ -151,5 +147,21 @@ public class GameFlow extends GridPane {
 		
 //		alert.showAndWait();
 //		alert.close();
+	}
+	
+	public void showScores() {
+		this.getChildren().remove(current);
+		this.add(current, this.board.getWidth() + 1, 1);
+		this.current.setText("Current player: " + this.curr.getChip());
+
+		this.getChildren().remove(this.black);
+		this.add(this.black, this.board.getWidth() + 1, 2);
+		
+		this.getChildren().remove(this.white);
+		this.add(this.white, this.board.getWidth() + 1, 3);
+		
+		this.black.setText("Black score: " + this.board.getBlackScore());
+		this.white.setText("White score: " + this.board.getWhiteScore());
+		
 	}
 }
