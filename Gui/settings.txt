@@ -1,0 +1,4 @@
+opening player: black
+board size: 8
+first color: blue
+second color: red

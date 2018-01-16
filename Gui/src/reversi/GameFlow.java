@@ -21,12 +21,16 @@ public class GameFlow extends GridPane {
 	
 	private Text scores;
 	
-	public GameFlow() {
-		this.board = new Board();
-		this.blackPlayer = new Player(Status.BLACK);
-		this.whitePlayer = new Player(Status.WHITE);
+	public GameFlow(String opening, int size, String firstColor, String secondColor) {
+		this.board = new Board(size, size);
+		this.blackPlayer = new Player(Status.BLACK, firstColor);
+		this.whitePlayer = new Player(Status.WHITE, secondColor);
 		
-		this.curr = this.blackPlayer;
+		if (opening.equals("black"))
+			this.curr = this.blackPlayer;
+		else 
+			this.curr = this.whitePlayer;
+		
 		this.scores = new Text("");
 	}
 
@@ -53,9 +57,9 @@ public class GameFlow extends GridPane {
 	}
 
 	//runs basic game loop.
-	public void run() throws IOException {
+	public void run(String firstColor, String secondColor) throws IOException {
 		//initializing board and starting.
-		  this.board.initialize(this);
+		  this.board.initialize(firstColor, secondColor, this);
 		  showScores();
 		  
 		  this.board.updateOptionalMovesList(this.curr.getChip());
@@ -130,6 +134,7 @@ public class GameFlow extends GridPane {
 	public void showScores() {
 		this.getChildren().remove(this.scores);
 		this.add(this.scores, this.board.getWidth() + 1, 1,this.board.getWidth() + 2, 5);
-		this.scores.setText("Current player: " + this.curr.getChip() + "\nBlack player score: " + this.board.getBlackScore() + "\nWhite player score: " + this.board.getWhiteScore());
+		this.scores.setText("Current player: " + this.curr.getColor() + "\n" + this.blackPlayer.getColor() + " player score: " 
+						+ this.board.getBlackScore() + "\n" + this.whitePlayer.getColor() + " player score: " + this.board.getWhiteScore());
 	}
 }

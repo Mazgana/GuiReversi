@@ -37,16 +37,17 @@ public class Cell {
 		this.grid = gp;
 	}
 	
-	public Cell(Status s, int r, int c, GridPane gp) {
+	public Cell(Status s, int r, int c, String firstColor, String secondColor, GridPane gp) {
 			this.cellStatus = s;
 			this.row = r;
 			this.col = c;
 			this.grid = gp;
 			
-			this.ivWhite = new ImageView(getClass().getResource("white.PNG").toExternalForm());
-			this.ivBlack = new ImageView(getClass().getResource("black.PNG").toExternalForm());
-			this.ivEmpty = new ImageView(getClass().getResource("empty.PNG").toExternalForm());
-			this.ivOptional = new ImageView(getClass().getResource("option.PNG").toExternalForm());
+			this.ivBlack = new ImageView(getClass().getResource(firstColor + ".jpg").toExternalForm());
+			this.ivWhite = new ImageView(getClass().getResource(secondColor + ".jpg").toExternalForm());
+			
+			this.ivEmpty = new ImageView(getClass().getResource("empty.jpg").toExternalForm());
+			this.ivOptional = new ImageView(getClass().getResource("option.jpg").toExternalForm());
 	}
 	
 	public Cell(int r, int c, GridPane gp) {
@@ -112,9 +113,5 @@ public class Cell {
 			  
 			  this.cellStatus = Status.BLACK;
 		  }
-	}
-	
-	public void printCell() {
-		System.out.print("(" + this.row + "," + this.col + ")");
 	}
 }

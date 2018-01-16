@@ -62,7 +62,7 @@ public class Board {
 		return this.whiteScore;
 	}
 	
-	public void initialize(GridPane gp) {
+	public void initialize(String firstColor, String secondColor, GridPane gp) {
 		this.grid = gp;
 		
 		int i, j;
@@ -76,17 +76,17 @@ public class Board {
 		this.cellWidth = width / this.CellArr[0].length;
 		
 		for (i = 0; i <= this.length; i++) {
-			CellArr[i][0] = new Cell(Status.EMPTY, i, 0, this.grid);
+			CellArr[i][0] = new Cell(Status.EMPTY, i, 0, firstColor, secondColor, this.grid);
 		}
 		
 		for (i = 0; i <= this.width; i++) {
-			CellArr[0][i] = new Cell(Status.EMPTY, 0, i, this.grid);
+			CellArr[0][i] = new Cell(Status.EMPTY, 0, i, firstColor, secondColor, this.grid);
 		}
 		
 		//initializing all clean cells
 		for (i = 1; i <= this.length ; i++) {
 			for (j = 1; j <= this.width; j++) {
-				CellArr[i][j] = new Cell(Status.EMPTY, i, j, this.grid);
+				CellArr[i][j] = new Cell(Status.EMPTY, i, j, firstColor, secondColor, this.grid);
 				CellArr[i][j].setStatus(this.cellHeight, this.cellWidth, Status.EMPTY);
 			}
 		}
