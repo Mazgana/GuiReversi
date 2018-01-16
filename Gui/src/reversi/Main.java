@@ -51,7 +51,7 @@ public class Main extends Application {
 	        }
 	        else if (e.getSource()==btnSettings) {
 				GridPane rootSetting = (GridPane)FXMLLoader.load(getClass().getResource("SettingsFXML.fxml"));
-		       	Scene sceneSetting = new Scene(rootSetting, 400, 200);
+		       	Scene sceneSetting = new Scene(rootSetting, 400, 300);
 		       	Stage stage = new Stage();
 		       	stage.setTitle("Reversi Settings");
 		       	stage.setScene(sceneSetting);
