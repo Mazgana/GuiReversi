@@ -63,7 +63,7 @@ public class Board {
 	}
 	
 	public void initialize(String firstColor, String secondColor, GridPane gp) {
-		this.grid = gp;
+		this.grid = gp;		
 		
 		int i, j;
 		int x = this.width/2;
