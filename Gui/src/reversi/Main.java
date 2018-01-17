@@ -8,14 +8,22 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 
 public class Main extends Application {
-	private Button btnGame, btnSettings, btnMenu;
+	private Button btnStart, btnSettings, btnMenu;
     private Label lblMenu;
     private VBox pane;
     private Scene sceneMenu, scene;
@@ -25,24 +33,51 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		theStage = primaryStage;
 		
-        //make things to put on pane
-        btnGame = new Button("play game");
+        //organize start button with image
+		StackPane spStart = new StackPane();
+        btnStart = new Button("startGame");
+        ImageView ivStart = new ImageView(new Image(getClass().getResourceAsStream("startButton.jpg")));
+        ivStart.setFitHeight(50);
+        ivStart.setFitWidth(150);
+        btnStart.setMinSize(100, 50);
+        btnStart.setStyle("-fx-background-color: transparent;");
+        btnStart.setOnAction(e-> ButtonClicked(e));
+        spStart.getChildren().addAll(ivStart, btnStart);
+ 
+       //organize settings button with image
+        StackPane spSettings = new StackPane();
         btnSettings = new Button("settings");
-        btnMenu = new Button("quit");
-        btnGame.setOnAction(e-> ButtonClicked(e));
+        ImageView ivSettings = new ImageView(new Image(getClass().getResourceAsStream("settingsButton.jpg")));
+        ivSettings.setFitHeight(50);
+        ivSettings.setFitWidth(250);
+        btnSettings.setMinSize(100, 50);
+        btnSettings.setStyle("-fx-background-color: transparent;");
         btnSettings.setOnAction(e-> ButtonClicked(e));
-        btnMenu.setOnAction(e-> ButtonClicked(e));
-        lblMenu = new Label("Menu");
+        spSettings.getChildren().addAll(ivSettings, btnSettings);
+//        btnSettings = new Button("settings");
+//        btnSettings.setOnAction(e-> ButtonClicked(e));
+
+        //add everything to pane and organize menu
+        lblMenu = new Label("");
+        lblMenu.setMinSize(600.0, 300.0);
+        lblMenu.setAlignment(Pos.CENTER);
         pane = new VBox();
         pane.setAlignment(Pos.CENTER);
-        pane.setStyle("-fx-background-color: darkblue;-fx-padding: 10px;");
-
-        //add everything to pane
-        pane.getChildren().addAll(lblMenu, btnGame, btnSettings);
-        lblMenu.setMinSize(600.0, 200.0);
-        lblMenu.setAlignment(Pos.CENTER);
-        btnGame.setMinSize(100, 50);
-        sceneMenu = new Scene(pane, 700, 400);
+        pane.getChildren().addAll(lblMenu, spStart, spSettings);
+        
+        //setting menu background
+        Image im = new Image(getClass().getResource("reversiMenu.jpg").toExternalForm());
+        Background bg = new Background(new BackgroundImage(im,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                  new BackgroundSize(pane.getPrefWidth(), pane.getPrefHeight(), false, false, false, true)));
+       
+        pane.setBackground(bg);
+        
+        //adding button to return to menu
+        btnMenu = new Button("quit");
+        btnMenu.setOnAction(e-> ButtonClicked(e));
+        
+        sceneMenu = new Scene(pane, 800, 600);
         primaryStage.setTitle("Reversi");
 		primaryStage.setScene(sceneMenu);
 		primaryStage.show();
@@ -50,7 +85,7 @@ public class Main extends Application {
 	
 	public void ButtonClicked(ActionEvent e) {
 		try {
-	        if (e.getSource() == btnGame) {
+	        if (e.getSource() == btnStart) {
 				Pane root = (Pane)FXMLLoader.load(getClass().getResource("FXML.fxml"));
 				root.getChildren().add(btnMenu);
 				btnMenu.relocate(400, 460);
