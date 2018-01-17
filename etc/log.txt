@@ -1,0 +1,265 @@
+commit 1b78ae6073549a72d039cca981dd7971ed84a4d5
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 23:11:50 2018 +0200
+
+    adding resources folder
+
+commit 231cfc230a132ded9c5e3b0a7f050fb7d51359b0
+Merge: 2cd1c02 9a478b1
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 22:28:21 2018 +0200
+
+    Merge branch 'master' of https://github.com/Mazgana/GuiReversi
+
+commit 2cd1c0241269f4bb18646694fc848a17c90a0f1a
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 22:28:15 2018 +0200
+
+    comments
+
+commit 9a478b15af9378030582f017c12aa9dc1fb88fa1
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 22:25:18 2018 +0200
+
+    adding comments
+
+commit 7f14b413a0f28980beec8897048a5236df46b0fc
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 21:55:59 2018 +0200
+
+    adding the winner's color to the winning alert
+
+commit 2301774e487decee9ed618f8e0413f016918d141
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 21:49:54 2018 +0200
+
+    adding mennu comments
+
+commit 132a81ec401757a89f3c096365ed87c785c79f1b
+Merge: 49ed737 9d31175
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 21:48:55 2018 +0200
+
+    Merge branch 'master' of https://github.com/Mazgana/GuiReversi
+
+commit 49ed737f879414edd29f56ce5c0ab3dae6c0ae80
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 21:48:49 2018 +0200
+
+    adding mennu comments
+
+commit 9d31175f77b5539a33ae3b9764b1cd07bd6268ef
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 21:46:00 2018 +0200
+
+    fixing bug when reading from file
+
+commit 1b4a869bd7628f5b236049046a9b28b709833839
+Merge: c0056d5 f9456b7
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 21:40:11 2018 +0200
+
+    fixing conflicts
+
+commit c0056d55604ee6344b86ecf3c682e55441c4367c
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 21:38:43 2018 +0200
+
+    fixing bugs in design and adding default values in case the settings file is empty
+
+commit f9456b7b31db034fbb00a29a572ad71dc859fe60
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 21:32:56 2018 +0200
+
+    finishing menu styling
+
+commit 205e6873c18d5876eff35c0e705693dd6ee6c1d2
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 20:39:10 2018 +0200
+
+    organize the settings screen
+
+commit 1c6dc60dc977f60682f3983c0fc6a78805f1e233
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 20:24:00 2018 +0200
+
+    changing the location and the design of the scores
+
+commit 314a8a029faa38836b28c82e45c780bbdb53d378
+Merge: fe80d48 acc364e
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 19:19:14 2018 +0200
+
+    fix conflicts
+
+commit fe80d48f9017817cdc16a60e3591d184f731727e
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 19:18:20 2018 +0200
+
+    decorating the settings screen
+
+commit acc364e0e529415b6ac69ef9a63cded97672ef76
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 17:33:18 2018 +0200
+
+    update
+
+commit ba320673218bb5aee5b0bb54a5edb8c4122c6b96
+Merge: e37b55a cf6cd32
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 14:16:47 2018 +0200
+
+    return buttons
+
+commit e37b55a1905b2e2204e5162a43f5c3415d15d0da
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 14:15:57 2018 +0200
+
+    return buttons
+
+commit cf6cd32efca518568c12e44c9882373fdf73bbab
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 17 13:32:36 2018 +0200
+
+    writing to file the user's settings
+
+commit 0160e2c0797e5a806d99253e52f60b2e8d9efa18
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 10:04:01 2018 +0200
+
+    alert popups fixed
+
+commit 53b89417d91aa8dd92fa0c173752d42e217226c4
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 17 09:44:43 2018 +0200
+
+    settings controller
+
+commit 868131c91ee5ec4126980bc2a9492f798c864849
+Merge: 62296fa becd388
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Tue Jan 16 22:32:11 2018 +0200
+
+    Merge branch 'master' of https://github.com/Mazgana/GuiReversi
+
+commit 62296fa7302340e076965de8ee1e1c4fd96a6576
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Tue Jan 16 22:32:01 2018 +0200
+
+    settings controller
+
+commit becd3885f5b85c665a5c2db4ec7fbf0bd8dd9cdf
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Tue Jan 16 22:17:55 2018 +0200
+
+    reading settings from file & adding other chip colors
+
+commit 8f1d34c74201bec4d5e7e70c154ae56e8c71fc5f
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Mon Jan 15 23:39:00 2018 +0200
+
+    adding basic menu and setting FXML
+
+commit 700341c53e55b4f4ec0b16c97c2b42346b4c2b22
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Mon Jan 15 15:51:58 2018 +0200
+
+    deleting game flow controller and FXML
+
+commit c86ca9ebf2fbb9ba52beddf256ae827be8e92c12
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Mon Jan 15 14:07:36 2018 +0200
+
+    changing location of scores and adding gap before the board
+
+commit b240dd58183792953e0d05b04977e64c42ec9083
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Mon Jan 15 11:46:21 2018 +0200
+
+    changing the scores display
+
+commit 5fa5623bf23320a653f40bc46c9149fc5fb66904
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Mon Jan 15 11:32:14 2018 +0200
+
+    changing scores display
+
+commit 54abfec4753d7a9564fe1e6bae0115857ee3cd17
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Sun Jan 14 22:57:16 2018 +0200
+
+    add optional moves animation
+
+commit e0a68a83e8c6205226f6d5718041bdf635a05b2a
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Sun Jan 14 02:06:38 2018 +0200
+
+    adding current player & player's scores display
+
+commit abc5852e868be9bc4875ece5256124426a8bcd58
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Fri Jan 12 16:30:04 2018 +0200
+
+    adding play one turn method
+
+commit 69f69269b37bba2b8a56af3f4d909947fde51488
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Fri Jan 12 01:23:01 2018 +0200
+
+    adding play turn method
+
+commit 414ff0b9c0bb5351378209e3ee2ec5a542ba908c
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Thu Jan 11 20:04:47 2018 +0200
+
+    Decoratig the board, fixing flow bugs and running game
+
+commit 1b3c4af550d8ab235a17e0dca8350e83c38c1c5b
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 10 23:22:10 2018 +0200
+
+    connecting the game flow to the gui
+
+commit ab2bd0e37ea6b5e5926e48f890293d943dd09d44
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 10 20:32:59 2018 +0200
+
+    creating gui screen
+
+commit 0431a5e6c8768a873ada322d35162d822d45cf1d
+Author: Leah Wachtfogel <leah.wach@gmail.com>
+Date:   Wed Jan 10 15:54:32 2018 +0200
+
+    first steps, opening files
+
+commit d675c0ac729e41e60850f61af0f5265132037d94
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Wed Jan 10 14:05:25 2018 +0200
+
+    Converting the game's code to java
+
+commit 12a5f60346e06c8784df81bb94a9ffbb1c5df085
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Mon Jan 8 20:30:46 2018 +0200
+
+    create new fx project
+
+commit 534501d2a867b203ad54e7450bf9b0b01ebb6b7a
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Mon Jan 8 19:32:39 2018 +0200
+
+    delete empty project
+
+commit 65aedbc94baa2367359e0f2c2d2dafbc0da260dd
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Mon Jan 8 19:29:26 2018 +0200
+
+    Revert "creating new 'gui' project"
+    
+    This reverts commit 593c7cbfe010b4eee35e6970dbf9b24b098351b0.
+
+commit 593c7cbfe010b4eee35e6970dbf9b24b098351b0
+Author: mazgana <adi.mazgani@gmail.com>
+Date:   Mon Jan 8 19:19:25 2018 +0200
+
+    creating new 'gui' project
