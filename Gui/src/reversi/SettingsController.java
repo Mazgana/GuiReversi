@@ -38,6 +38,10 @@ public class SettingsController implements Initializable{
 	@FXML
 	private Button saveBtn;
 	
+	private int boardSize;
+	private String color1;
+	private String color2;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		root.setPrefWidth(600);
@@ -55,21 +59,25 @@ public class SettingsController implements Initializable{
 		sizeChoice.setValue("8x8");
 		sizeChoice.setItems(sizeList);
 
-		
-		ArrayList<String> colors = new ArrayList<String>(Arrays.asList("black", "blue", "brown", "green", "grey", "light green", "light purple", "orange", "purple", "red", "white", "yellow"));
+		ArrayList<String> colors = new ArrayList<String>(Arrays.asList("Black", "Blue", "Brown", "Green", "Grey", "Light green", "Light purple", "Orange", "Purple", "Red", "White", "Yellow"));
 		ObservableList<String> colorList = FXCollections.observableArrayList(colors);
-		colChoice1.setValue("black");
+		colChoice1.setValue("Black");
 		colChoice1.setItems(colorList);
-		colChoice2.setValue("white");
+		colChoice2.setValue("White");
 		colChoice2.setItems(colorList);
 		
 		SettingsWriter sw = new SettingsWriter();
 		
+		//setting default values
+		this.boardSize = Board.DEFAULT_LEGTH;
+		this.color1 = "Black";
+		this.color2 = "White";
+		
 		saveBtn.setOnAction(event-> {
 			String size = sizeChoice.getValue();
-			int boardSize = Integer.valueOf(size.split("x")[0]);
-			String color1 = colChoice1.getValue();
-			String color2 = colChoice2.getValue();
+			this.boardSize = Integer.valueOf(size.split("x")[0]);
+			this.color1 = colChoice1.getValue();
+			this.color2 = colChoice2.getValue();
 			if (color1.equals(color2)) {
 				Alert alert = new Alert(AlertType.NONE, "OOPS! the two players can't play the same color..\n Chose another color.");
 				alert.getDialogPane().getButtonTypes().add(ButtonType.OK);

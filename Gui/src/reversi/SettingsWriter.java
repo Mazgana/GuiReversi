@@ -29,7 +29,6 @@ public class SettingsWriter {
 			br.newLine();
 			
 			br.write(secondColor);
-			br.newLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -43,9 +42,4 @@ public class SettingsWriter {
 			}
 		}
 	}
-		
-//      clear file then:
-//		writing settings to file unless null, in which case default!
-// 		split size string
-	
 }

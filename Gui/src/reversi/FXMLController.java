@@ -60,18 +60,23 @@ public class FXMLController implements Initializable{
 			settingsFile = new FileReader("settings.txt");
 			br = new BufferedReader(settingsFile);
 			
-			//board size
 			String temp = br.readLine();
-			this.size = Integer.valueOf(temp.substring(12, temp.length()));
+			if (temp == null) { //the file is empty
+				SettingsWriter sw = new SettingsWriter();
+				sw.updateSettings(Board.DEFAULT_LEGTH, "Black", "White");
+				temp = br.readLine();
+			} 
 			
+			//board size
+			this.size = Integer.valueOf(temp.substring(12, temp.length()));
+				
 			//first player color
 			temp = br.readLine();
 			this.firstColor = temp.substring(13, temp.length());
-			
+				
 			//second player color
 			temp = br.readLine();
 			this.secondColor = temp.substring(14, temp.length());
-			
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {
