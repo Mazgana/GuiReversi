@@ -34,10 +34,13 @@ public class FXMLController implements Initializable{
 		setGameSettings();
 		
 		this.game = new GameFlow(this.size, this.firstColor, this.secondColor);
+		
+		//the screen's settings
 		this.game.setPrefWidth(500);
 		this.game.setPrefHeight(500);
 		root.getChildren().add(this.game);
 		
+		//setting the game's screen background
 		Image im = new Image(getClass().getResource("back2.jpeg").toExternalForm());
 		Background bg = new Background(new BackgroundImage(im,
 		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -63,6 +66,7 @@ public class FXMLController implements Initializable{
 			String temp = br.readLine();
 			if (temp == null) { //the file is empty
 				SettingsWriter sw = new SettingsWriter();
+				//writing to the file the default values
 				sw.updateSettings(Board.DEFAULT_LEGTH, "Black", "White");
 				temp = br.readLine();
 			} 
@@ -81,7 +85,7 @@ public class FXMLController implements Initializable{
 			e1.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
+		} finally { //closing the file
 			try {
 				if (br != null)
 					br.close();

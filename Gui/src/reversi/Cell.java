@@ -43,6 +43,7 @@ public class Cell {
 			this.col = c;
 			this.grid = gp;
 			
+			//defining the cell optional pictures
 			this.ivBlack = new ImageView(getClass().getResource(firstColor + ".jpg").toExternalForm());
 			this.ivWhite = new ImageView(getClass().getResource(secondColor + ".jpg").toExternalForm());
 			
@@ -69,6 +70,8 @@ public class Cell {
 			return this.col;
 	}
 	
+	
+	//setting the cell's new status and changing it's picture
 	public void setStatus(int cellHeight, int cellWidth, Status s) {
 			if (s == Status.EMPTY) {
 				this.grid.getChildren().remove(this.ivOptional);
@@ -97,6 +100,7 @@ public class Cell {
 			this.cellStatus = s;
 	}
 	
+	//changing the cell status from one player to the other & it's picture
 	public void flip(int cellHeight, int cellWidth) {
 		  if (this.cellStatus == Status.BLACK) {
 			  this.grid.getChildren().remove(this.ivBlack);

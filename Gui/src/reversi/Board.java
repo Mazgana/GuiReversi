@@ -30,14 +30,6 @@ public class Board {
 		this.optionalMoves = new ArrayList<Cell>();
  	}
 	
-	public Board() {
-		this.width = DEFAULT_WIDTH;
-		this.length = DEFAULT_LEGTH;
-		
-		this.CellArr = new Cell[this.width + 1][this.length + 1];
-		this.optionalMoves = new ArrayList<Cell>();
-	}
-	
 	public int getWidth() {
 		return this.width;
 	}
@@ -75,19 +67,13 @@ public class Board {
 		this.cellHeight = height / this.length;
 		this.cellWidth = width / this.CellArr[0].length;
 		
-		for (i = 0; i <= this.length; i++) {
-			CellArr[i][0] = new Cell(Status.EMPTY, i, 0, firstColor, secondColor, this.grid);
-		}
-		
-		for (i = 0; i <= this.width; i++) {
-			CellArr[0][i] = new Cell(Status.EMPTY, 0, i, firstColor, secondColor, this.grid);
-		}
-		
 		//initializing all clean cells
-		for (i = 1; i <= this.length ; i++) {
-			for (j = 1; j <= this.width; j++) {
+		for (i = 0; i <= this.length ; i++) {
+			for (j = 0; j <= this.width; j++) {
 				CellArr[i][j] = new Cell(Status.EMPTY, i, j, firstColor, secondColor, this.grid);
-				CellArr[i][j].setStatus(this.cellHeight, this.cellWidth, Status.EMPTY);
+				if (i !=0 && j != 0)
+					//adding picture to the game's cells
+					CellArr[i][j].setStatus(this.cellHeight, this.cellWidth, Status.EMPTY);
 			}
 		}
 		
@@ -98,6 +84,7 @@ public class Board {
 		CellArr[x + 1][y].setStatus(this.cellHeight, this.cellWidth, Status.BLACK);
 	}
 
+	//getting the specific cell's status
 	public Status reveal(int row, int col) {
 		return this.CellArr[row][col].getStatus();
 	}
@@ -106,7 +93,11 @@ public class Board {
 		//making move of putting chip and calling to flipping chips accordingly.
 	  CellArr[x][y].setStatus(this.cellHeight, this.cellWidth, chip);
 		flipChips(chip, CellArr[x][y]);
+		
+		//removing the chosen chip from the options list
 		this.optionalMoves.remove(CellArr[x][y]);
+		
+		//calculating the current score in the game
 		calculateCurrentScore();
 	}
 	
@@ -161,18 +152,19 @@ public class Board {
 		return this.optionalMoves;
 	}
 	
+	//getting the options list and update their status to be optional 
 	public void updateOptionalMovesList(Status s) {
 		cleanOptionalMovesList();
 		calculateOptions(s);
 		turnOptional();
 	}
 	
-	public void turnOptional() {
+	private void turnOptional() {
 		for (int i = 0; i < this.optionalMoves.size(); i++)
 			this.optionalMoves.get(i).setStatus(this.cellHeight, this.cellWidth, Status.OPTIONAL);
 	}
 	
-	public void calculateOptions(Status player) {
+	private void calculateOptions(Status player) {
 		// loop over board finding valid cells.
 	    for(int i = 1; i <= length; i++) {
 	        for (int j = 1; j <= width; j++) {
@@ -222,6 +214,7 @@ public class Board {
 	    }
 }
 	
+	//checking if the given cell is one of the options
 	public boolean isCellInOptionArray(Cell check) {
     int i;
 
@@ -237,7 +230,7 @@ public class Board {
 		return false;
 	}
 	
-	public void cleanOptionalMovesList(){
+	private void cleanOptionalMovesList(){
 		for (int i = 0; i < this.optionalMoves.size(); i++) {
 			this.optionalMoves.get(i).setStatus(this.cellHeight, this.cellWidth, Status.EMPTY);
 		}
@@ -269,7 +262,7 @@ public class Board {
 	    	}
 	}
 	
-	public void calculateCurrentScore() {
+	private void calculateCurrentScore() {
 	    int xCount = 0, oCount = 0;
 	    for(int i = 0; i <= length; i++) {
 	        for (int j = 0; j <= width; j++) {
@@ -286,6 +279,7 @@ public class Board {
 	    this.whiteScore = oCount;
 	}
 	
+	//calculating the location of a specific point on the board (cell & row)
 	public int[] locationOfPoint(double x, double y) {
 		int i, j;
 		
