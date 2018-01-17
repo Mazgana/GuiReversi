@@ -13,7 +13,7 @@ public class GameFlow extends GridPane {
 	
 	private Player blackPlayer;
 	private Player whitePlayer;
-	private Player curr;
+	private Player current;
 	
 	private Board board;
 	
@@ -29,12 +29,13 @@ public class GameFlow extends GridPane {
 		this.blackPlayer = new Player(Status.BLACK, firstColor);
 		this.whitePlayer = new Player(Status.WHITE, secondColor);
 		
-		this.curr = this.blackPlayer;
+		this.current = this.blackPlayer;
 		
 		this.scores = new Text("");
 	}
 
-	public int playTurn(Player p, Board board) throws IOException {
+	//checking the point is valid and if so - choose this cell
+	public int checkPointAndPlay(Player p, Board board) throws IOException {
 	    int[] coordinates = board.locationOfPoint(this.x, this.y);
 	    this.chosen = new Cell(coordinates[0], coordinates[1], this);
 				    
@@ -48,14 +49,6 @@ public class GameFlow extends GridPane {
 	    return 1;
 	}
 
-	public Player getBlackPlayer() {
-		return this.blackPlayer;
-	}
-
-	public Player getWhitePlayer() {
-		return this.whitePlayer;
-	}
-
 	//runs basic game loop.
 	public void run(String firstColor, String secondColor) throws IOException {
 		
@@ -63,8 +56,9 @@ public class GameFlow extends GridPane {
 		  this.board.initialize(firstColor, secondColor, this);
 		  showScores();
 		  
-		  this.board.updateOptionalMovesList(this.curr.getChip());
+		  this.board.updateOptionalMovesList(this.current.getChip());
 		  
+		  //waiting for player's choice on screen
 			this.setOnMouseClicked(event -> {
 				this.x = event.getX();
 				this.y = event.getY();
@@ -83,27 +77,28 @@ public class GameFlow extends GridPane {
 		int played = 0;
 		
 		try {
-			played = playTurn(this.curr, this.board);
+			played = checkPointAndPlay(this.current, this.board);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+		//the game is over
 		if (this.board.isBoardFull()) {
 				endGame();
 				return;
 		}
 		if (played != 2) {
-			this.board.updateOptionalMovesList(this.curr.getOppositeType());
+			this.board.updateOptionalMovesList(this.current.getOppositeType());
 			if (this.board.getOptions().size() == 0) { //the next player has no moves
-				this.board.updateOptionalMovesList(this.curr.getChip()); //both players have moves
+				this.board.updateOptionalMovesList(this.current.getChip()); //both players have moves - the game is over
 				if (this.board.getOptions().size() == 0)
 					endGame();
 			} else {
-				if (this.curr.getChip() == Status.BLACK) { //changing current player
-					this.curr = this.whitePlayer;
+				if (this.current.getChip() == Status.BLACK) { //changing current player to the opposite
+					this.current = this.whitePlayer;
 				}
 				else {
-					this.curr = this.blackPlayer;
+					this.current = this.blackPlayer;
 				}
 			}
 		}
@@ -132,11 +127,12 @@ public class GameFlow extends GridPane {
 		alert.showAndWait();
 	}
 	
+	//showing the current player and both player's scores on screen
 	public void showScores() {
 		this.getChildren().remove(this.scores);
 		this.scores.setFont(Font.font ("Purisa", 16));
 		this.add(this.scores, this.board.getWidth() + 1, 1, this.board.getWidth() + 1, 5);
-		this.scores.setText(" Current player: " + this.curr.getColor() + "\n " + this.blackPlayer.getColor() + " player score: " 
+		this.scores.setText(" currentent player: " + this.current.getColor() + "\n " + this.blackPlayer.getColor() + " player score: " 
 						+ this.board.getBlackScore() + "\n " + this.whitePlayer.getColor() + " player score: " + this.board.getWhiteScore());
 	}
 }
