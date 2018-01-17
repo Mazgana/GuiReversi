@@ -14,21 +14,19 @@
 <GridPane fx:id="root" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reversi.SettingsController">
    <columnConstraints>
       <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints maxWidth="94.0" minWidth="10.0" prefWidth="77.0" />
-      <ColumnConstraints maxWidth="123.0" minWidth="10.0" prefWidth="123.0" />
-      <ColumnConstraints maxWidth="123.0" minWidth="10.0" prefWidth="123.0" />
+      <ColumnConstraints maxWidth="94.0" minWidth="10.0" prefWidth="91.0" />
+      <ColumnConstraints maxWidth="123.0" minWidth="10.0" prefWidth="112.0" />
+      <ColumnConstraints maxWidth="123.0" minWidth="10.0" prefWidth="73.0" />
       <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
       <ColumnConstraints maxWidth="3.0" minWidth="0.0" prefWidth="0.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="46.0" />
-      <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="53.0" />
-      <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="53.0" />
-      <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="13.0" />
-      <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="10.0" />
-      <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="10.0" />
+      <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" />
+      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="22.0" />
+      <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" />
+      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="22.0" />
+      <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" />
+      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="22.0" />
    </rowConstraints>
    <children>
       <ChoiceBox fx:id="colChoice1" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -76,11 +74,7 @@
             </Label>
          </children>
       </StackPane>
-      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
-         <children>
-            <Button fx:id="saveBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Save" textAlignment="CENTER" />
-         </children>
-      </StackPane>
+      <Button fx:id="saveBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Save" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

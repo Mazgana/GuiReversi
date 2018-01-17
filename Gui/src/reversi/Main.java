@@ -50,7 +50,7 @@ public class Main extends Application {
 	
 	public void ButtonClicked(ActionEvent e) {
 		try {
-	        if (e.getSource()==btnGame) {
+	        if (e.getSource() == btnGame) {
 				Pane root = (Pane)FXMLLoader.load(getClass().getResource("FXML.fxml"));
 				root.getChildren().add(btnMenu);
 				btnMenu.relocate(400, 460);
@@ -59,15 +59,15 @@ public class Main extends Application {
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	            theStage.setScene(scene);
 	        }
-	        else if (e.getSource()==btnSettings) {
+	        else if (e.getSource() == btnSettings) {
 				GridPane rootSetting = (GridPane)FXMLLoader.load(getClass().getResource("SettingsFXML.fxml"));
-		       	Scene sceneSetting = new Scene(rootSetting, 400, 300);
+		       	Scene sceneSetting = new Scene(rootSetting, 400, 350);
 		       	Stage stage = new Stage();
 		       	stage.setTitle("Reversi Settings");
 		       	stage.setScene(sceneSetting);
 		       	stage.show();
 	        }
-	        if (e.getSource()==btnMenu) {
+	        if (e.getSource() == btnMenu) {
 	        	theStage.setScene(sceneMenu);
 	    		theStage.show();
 	        }
