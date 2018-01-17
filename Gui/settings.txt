@@ -1,3 +1,0 @@
-board size: 8
-first color: light green
-second color: black

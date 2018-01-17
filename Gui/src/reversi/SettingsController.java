@@ -10,9 +10,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -32,12 +39,17 @@ public class SettingsController implements Initializable{
 	@FXML
 	private Button saveBtn;
 	
-	
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		root.setPrefWidth(500);
-		root.setPrefHeight(500);
+		root.setPrefWidth(600);
+		root.setPrefHeight(600);
+		
+		Image im = new Image(getClass().getResource("back.png").toExternalForm());
+		Background bg = new Background(new BackgroundImage(im,
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          new BackgroundSize(root.getPrefWidth(), root.getPrefHeight(), false, false, false, true)));
+		
+		root.setBackground(bg);
 		
 		ArrayList<String> sizes = new ArrayList<String>(Arrays.asList("4x4","6x6","8x8","10x10","12x12", "14x14", "16x16", "18x18", "20x20"));
 		ObservableList<String> sizeList = FXCollections.observableArrayList(sizes);
@@ -47,9 +59,9 @@ public class SettingsController implements Initializable{
 		
 		ArrayList<String> colors = new ArrayList<String>(Arrays.asList("black", "blue", "brown", "green", "grey", "light green", "light purple", "orange", "purple", "red", "white", "yellow"));
 		ObservableList<String> colorList = FXCollections.observableArrayList(colors);
-		colChoice1.setValue("white");
+		colChoice1.setValue("black");
 		colChoice1.setItems(colorList);
-		colChoice2.setValue("black");
+		colChoice2.setValue("white");
 		colChoice2.setItems(colorList);
 		
 		SettingsWriter sw = new SettingsWriter();
