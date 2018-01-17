@@ -121,7 +121,12 @@ public class GameFlow extends GridPane {
 		if(winner == Status.EMPTY) {
 				alert.setContentText("It's a tie!");
 		} else {
-				alert.setContentText("Player " + winner.toString() + " wins!");
+				String win = "";
+				if (winner == Status.BLACK)
+					win = this.blackPlayer.getColor();
+				else
+					win = this.whitePlayer.getColor();
+				alert.setContentText("Player " + win + " wins!");
 		}
 		
 		alert.showAndWait();
