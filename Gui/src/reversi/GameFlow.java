@@ -2,6 +2,7 @@ package reversi;
 
 import java.io.IOException;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -87,9 +88,10 @@ public class GameFlow extends GridPane {
 			e.printStackTrace();
 		}
 		
-		if (this.board.isBoardFull())
+		if (this.board.isBoardFull()) {
 				endGame();
-		
+				return;
+		}
 		if (played != 2) {
 			this.board.updateOptionalMovesList(this.curr.getOppositeType());
 			if (this.board.getOptions().size() == 0) { //the next player has no moves
@@ -113,6 +115,7 @@ public class GameFlow extends GridPane {
 
 		Alert alert = new Alert(AlertType.NONE);
 		alert.setHeaderText("GAME ENDED!");
+		alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
 		
 		Status winner = board.getWinner();
 		if(winner == Status.EMPTY) {
@@ -126,7 +129,7 @@ public class GameFlow extends GridPane {
 		} else {
 			System.out.println("Player " + winner.toString() + " wins!");
 		}
-		
+
 		alert.showAndWait();
 //		alert.close();
 	}

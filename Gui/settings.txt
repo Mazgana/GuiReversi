@@ -1,4 +1,4 @@
 opening player: black
-board size: 8
+board size: 4
 first color: blue
 second color: red

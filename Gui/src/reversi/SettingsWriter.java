@@ -1,9 +1,7 @@
 package reversi;
 
-import java.io.File;
-
 public class SettingsWriter {
-	private File file;
+//	private File file;
 	
 	public SettingsWriter() {
 //		file = ;

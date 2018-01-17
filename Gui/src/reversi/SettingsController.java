@@ -8,7 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -56,6 +59,9 @@ public class SettingsController implements Initializable{
 			String color1 = colChoice1.getValue();
 			String color2 = colChoice2.getValue();
 			if (color1.equals(color2)) {
+				Alert alert = new Alert(AlertType.NONE, "OOPS! the two players can't play the same color..\n Chose another color.");
+				alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+				alert.showAndWait();
 // add message cannot have same color
 				return;
 			}
