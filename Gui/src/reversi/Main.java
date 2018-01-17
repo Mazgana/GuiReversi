@@ -9,10 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 
@@ -44,7 +42,7 @@ public class Main extends Application {
         lblMenu.setMinSize(600.0, 200.0);
         lblMenu.setAlignment(Pos.CENTER);
         btnGame.setMinSize(100, 50);
-        sceneMenu = new Scene(pane, 600, 400);
+        sceneMenu = new Scene(pane, 700, 400);
         primaryStage.setTitle("Reversi");
 		primaryStage.setScene(sceneMenu);
 		primaryStage.show();
@@ -56,7 +54,7 @@ public class Main extends Application {
 				Pane root = (Pane)FXMLLoader.load(getClass().getResource("FXML.fxml"));
 				root.getChildren().add(btnMenu);
 				btnMenu.relocate(400, 460);
-				scene = new Scene(root,600,500);
+				scene = new Scene(root,700,500);
 				btnMenu.relocate(scene.getWidth() - 50, scene.getHeight() - 30);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	            theStage.setScene(scene);

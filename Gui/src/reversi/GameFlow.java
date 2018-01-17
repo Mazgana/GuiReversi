@@ -1,12 +1,13 @@
 package reversi;
 
 import java.io.IOException;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 public class GameFlow extends GridPane {
 	
@@ -128,9 +129,9 @@ public class GameFlow extends GridPane {
 	
 	public void showScores() {
 		this.getChildren().remove(this.scores);
-		this.scores.setTextAlignment(TextAlignment.RIGHT);
-		this.add(this.scores, this.board.getWidth() + 1, 1,this.board.getWidth() + 2, 5);
-		this.scores.setText("Current player: " + this.curr.getColor() + "\n" + this.blackPlayer.getColor() + " player score: " 
-						+ this.board.getBlackScore() + "\n" + this.whitePlayer.getColor() + " player score: " + this.board.getWhiteScore());
+		this.scores.setFont(Font.font ("Purisa", 16));
+		this.add(this.scores, this.board.getWidth() + 1, 1);
+		this.scores.setText(" Current player: " + this.curr.getColor() + "\n " + this.blackPlayer.getColor() + " player score: " 
+						+ this.board.getBlackScore() + "\n " + this.whitePlayer.getColor() + " player score: " + this.board.getWhiteScore());
 	}
 }

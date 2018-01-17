@@ -9,6 +9,12 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 
 public class FXMLController implements Initializable{
@@ -32,10 +38,16 @@ public class FXMLController implements Initializable{
 		this.game.setPrefHeight(500);
 		root.getChildren().add(this.game);
 		
+		Image im = new Image(getClass().getResource("back2.jpeg").toExternalForm());
+		Background bg = new Background(new BackgroundImage(im,
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          new BackgroundSize(root.getPrefWidth(), root.getPrefHeight(), false, false, false, true)));
+		
+		root.setBackground(bg);
+		
 		try {
 			this.game.run(this.firstColor, this.secondColor);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
