@@ -80,7 +80,7 @@ public class Main extends Application {
 	/*
 	 * handles an event of a menu related button being pressed
 	 */
-	public void ButtonClicked(ActionEvent e) {
+	private void ButtonClicked(ActionEvent e) {
 		try {
 	        if (e.getSource() == btnStart) {//loading starting new game
 				Pane root = (Pane)FXMLLoader.load(getClass().getResource("FXML.fxml"));
