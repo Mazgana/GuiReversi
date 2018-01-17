@@ -1,17 +1,51 @@
 package reversi;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class SettingsWriter {
-//	private File file;
+	private FileWriter file = null;
+	private BufferedWriter br = null;
 	
 	public SettingsWriter() {
-//		file = ;
+			try {
+				this.file = new FileWriter("settings.txt", false);
+				this.br = new BufferedWriter(this.file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	};
 	
-	public void updateSettings(String size, String color1, String color2) {
-		System.out.println("size: " + size + " __ color1: " + color1 + " __ color2: " + color2);
+	public void updateSettings(int size, String color1, String color2) {
+		String boardSize = "board size: " + size;
+		String firstColor = "first color: " + color1;
+		String secondColor = "second color: " + color2;
+		try {
+			br.write(boardSize);
+			br.newLine();
+			
+			br.write(firstColor);
+			br.newLine();
+			
+			br.write(secondColor);
+			br.newLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (this.br != null)
+					this.br.close();
+				if (this.file != null)
+					this.file.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+		
 //      clear file then:
 //		writing settings to file unless null, in which case default!
 // 		split size string
-	}
 	
 }

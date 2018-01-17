@@ -45,7 +45,7 @@ public class SettingsController implements Initializable{
 		sizeChoice.setItems(sizeList);
 
 		
-		ArrayList<String> colors = new ArrayList<String>(Arrays.asList("red","blue","green","grey","black","white"));
+		ArrayList<String> colors = new ArrayList<String>(Arrays.asList("black", "blue", "brown", "green", "grey", "light green", "light purple", "orange", "purple", "red", "white", "yellow"));
 		ObservableList<String> colorList = FXCollections.observableArrayList(colors);
 		colChoice1.setValue("white");
 		colChoice1.setItems(colorList);
@@ -56,16 +56,18 @@ public class SettingsController implements Initializable{
 		
 		saveBtn.setOnAction(event-> {
 			String size = sizeChoice.getValue();
+			int boardSize = Integer.valueOf(size.split("x")[0]);
 			String color1 = colChoice1.getValue();
 			String color2 = colChoice2.getValue();
 			if (color1.equals(color2)) {
 				Alert alert = new Alert(AlertType.NONE, "OOPS! the two players can't play the same color..\n Chose another color.");
 				alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
 				alert.showAndWait();
-// add message cannot have same color
+
 				return;
 			}
-			sw.updateSettings(size, color1, color2);
+			
+			sw.updateSettings(boardSize, color1, color2);
 		    Stage stage = (Stage) saveBtn.getScene().getWindow();
 		    stage.close();
 		});
