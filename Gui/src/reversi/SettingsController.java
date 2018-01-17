@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import reversi.Board;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 /*
  * This class controls the settings scene 
  */
@@ -52,7 +55,7 @@ public class SettingsController implements Initializable{
 		root.setPrefHeight(600);
 		
 		//setting background with image
-		Image im = new Image(getClass().getResource("back.png").toExternalForm());
+		Image im = new Image(getClass().getResource("/back.png").toExternalForm());
 		Background bg = new Background(new BackgroundImage(im,
 		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 		          new BackgroundSize(root.getPrefWidth(), root.getPrefHeight(), false, false, false, true)));

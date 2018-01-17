@@ -36,7 +36,7 @@
          <children>
             <ImageView fitHeight="99.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@note.png" />
+                  <Image url="@../../resources/note.png" />
                </image>
             </ImageView>
             <Label text="board size" textFill="#1b1b19">
@@ -50,7 +50,7 @@
          <children>
             <ImageView fitHeight="95.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@note.png" />
+                  <Image url="@../../resources/note.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" prefHeight="15.0" prefWidth="205.0" text="first player:">
@@ -64,7 +64,7 @@
          <children>
             <ImageView fitHeight="97.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@note.png" />
+                  <Image url="@../../resources/note.png" />
                </image>
             </ImageView>
             <Label text="second player:">

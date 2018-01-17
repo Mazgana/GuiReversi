@@ -7,8 +7,8 @@ import javafx.scene.layout.GridPane;
 
 public class Board {
 
-	static final int DEFAULT_WIDTH = 8;
-	static final int DEFAULT_LEGTH = 8;
+	public static final int DEFAULT_WIDTH = 8;
+	public static final int DEFAULT_LEGTH = 8;
 	
 	private int width;
 	private int length;

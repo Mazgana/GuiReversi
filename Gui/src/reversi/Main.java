@@ -26,12 +26,12 @@ public class Main extends Application {
     
 	@Override
 	public void start(Stage primaryStage) {
-		theStage = primaryStage;
+				theStage = primaryStage;
 		
         //organize start button with image
-		StackPane spStart = new StackPane();
+				StackPane spStart = new StackPane();
         btnStart = new Button("startGame");
-        ImageView ivStart = new ImageView(new Image(getClass().getResourceAsStream("startButton.jpg")));
+        ImageView ivStart = new ImageView(new Image(getClass().getResourceAsStream("/startButton.jpg")));
         ivStart.setFitHeight(50);
         ivStart.setFitWidth(150);
         btnStart.setMinSize(100, 50);
@@ -42,7 +42,7 @@ public class Main extends Application {
        //organize settings button with image
         StackPane spSettings = new StackPane();
         btnSettings = new Button("settings");
-        ImageView ivSettings = new ImageView(new Image(getClass().getResourceAsStream("settingsButton.jpg")));
+        ImageView ivSettings = new ImageView(new Image(getClass().getResourceAsStream("/settingsButton.jpg")));
         ivSettings.setFitHeight(50);
         ivSettings.setFitWidth(250);
         btnSettings.setMinSize(100, 50);
@@ -59,7 +59,7 @@ public class Main extends Application {
         pane.getChildren().addAll(lblMenu, spStart, spSettings);
         
         //setting menu background
-        Image im = new Image(getClass().getResource("reversiMenu.jpg").toExternalForm());
+        Image im = new Image(getClass().getResource("/reversiMenu.jpg").toExternalForm());
         Background bg = new Background(new BackgroundImage(im,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                   new BackgroundSize(pane.getPrefWidth(), pane.getPrefHeight(), false, false, false, true)));
@@ -73,8 +73,8 @@ public class Main extends Application {
         //opening window and starting menu
         sceneMenu = new Scene(pane, 800, 600);
         primaryStage.setTitle("Reversi");
-		primaryStage.setScene(sceneMenu);
-		primaryStage.show();
+				primaryStage.setScene(sceneMenu);
+				primaryStage.show();
 	}
 	
 	/*

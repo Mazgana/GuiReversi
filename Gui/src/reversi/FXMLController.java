@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import reversi.Board;
+import reversi.GameFlow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -41,7 +43,7 @@ public class FXMLController implements Initializable{
 		root.getChildren().add(this.game);
 		
 		//setting the game's screen background
-		Image im = new Image(getClass().getResource("back2.jpeg").toExternalForm());
+		Image im = new Image(getClass().getResource("/back2.jpeg").toExternalForm());
 		Background bg = new Background(new BackgroundImage(im,
 		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 		          new BackgroundSize(root.getPrefWidth(), root.getPrefHeight(), false, false, false, true)));

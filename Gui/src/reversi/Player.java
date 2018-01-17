@@ -1,4 +1,5 @@
 package reversi;
+
 /*
  * Player class represent a reversi game player. It holds it's chips and it's own color.
  */

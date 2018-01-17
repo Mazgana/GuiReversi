@@ -44,11 +44,11 @@ public class Cell {
 			this.grid = gp;
 			
 			//defining the cell optional pictures
-			this.ivBlack = new ImageView(getClass().getResource(firstColor + ".jpg").toExternalForm());
-			this.ivWhite = new ImageView(getClass().getResource(secondColor + ".jpg").toExternalForm());
+			this.ivBlack = new ImageView(getClass().getResource("/" + firstColor + ".jpg").toExternalForm());
+			this.ivWhite = new ImageView(getClass().getResource("/" + secondColor + ".jpg").toExternalForm());
 			
-			this.ivEmpty = new ImageView(getClass().getResource("empty.jpg").toExternalForm());
-			this.ivOptional = new ImageView(getClass().getResource("option.jpg").toExternalForm());
+			this.ivEmpty = new ImageView(getClass().getResource("/empty.jpg").toExternalForm());
+			this.ivOptional = new ImageView(getClass().getResource("/option.jpg").toExternalForm());
 	}
 	
 	public Cell(int r, int c, GridPane gp) {
