@@ -22,15 +22,12 @@ public class GameFlow extends GridPane {
 	
 	private Text scores;
 	
-	public GameFlow(String opening, int size, String firstColor, String secondColor) {
+	public GameFlow(int size, String firstColor, String secondColor) {
 		this.board = new Board(size, size);
 		this.blackPlayer = new Player(Status.BLACK, firstColor);
 		this.whitePlayer = new Player(Status.WHITE, secondColor);
 		
-		if (opening.equals("black"))
-			this.curr = this.blackPlayer;
-		else 
-			this.curr = this.whitePlayer;
+		this.curr = this.blackPlayer;
 		
 		this.scores = new Text("");
 	}
@@ -124,14 +121,7 @@ public class GameFlow extends GridPane {
 				alert.setContentText("Player " + winner.toString() + " wins!");
 		}
 		
-		if(winner == Status.EMPTY) {
-			System.out.println("It's a tie!");
-		} else {
-			System.out.println("Player " + winner.toString() + " wins!");
-		}
-
 		alert.showAndWait();
-//		alert.close();
 	}
 	
 	public void showScores() {

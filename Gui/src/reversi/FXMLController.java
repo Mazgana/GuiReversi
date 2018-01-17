@@ -18,7 +18,6 @@ public class FXMLController implements Initializable{
 	
 	private GameFlow game;
 	
-	private String opening;
 	private int size;
 	private String firstColor;
 	private String secondColor;
@@ -28,7 +27,7 @@ public class FXMLController implements Initializable{
 		//getting game's settings from the settings file
 		setGameSettings();
 		
-		this.game = new GameFlow(this.opening, this.size, this.firstColor, this.secondColor);
+		this.game = new GameFlow(this.size, this.firstColor, this.secondColor);
 		this.game.setPrefWidth(500);
 		this.game.setPrefHeight(500);
 		root.getChildren().add(this.game);
@@ -49,12 +48,8 @@ public class FXMLController implements Initializable{
 			settingsFile = new FileReader("settings.txt");
 			br = new BufferedReader(settingsFile);
 			
-			//Opening player
-			String temp = br.readLine();
-			this.opening = temp.substring(16, temp.length());
-			
 			//board size
-			temp = br.readLine();
+			String temp = br.readLine();
 			this.size = Integer.valueOf(temp.substring(12, temp.length()));
 			
 			//first player color
