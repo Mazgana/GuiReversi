@@ -29,7 +29,6 @@ public class SettingsWriter {
 			br.newLine();
 			
 			br.write(secondColor);
-			br.newLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

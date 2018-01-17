@@ -64,10 +64,10 @@ public class FXMLController implements Initializable{
 			if (temp == null) { //the file is empty
 				SettingsWriter sw = new SettingsWriter();
 				sw.updateSettings(Board.DEFAULT_LEGTH, "Black", "White");
+				temp = br.readLine();
 			} 
 			
 			//board size
-			temp = br.readLine();
 			this.size = Integer.valueOf(temp.substring(12, temp.length()));
 				
 			//first player color
