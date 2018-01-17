@@ -65,12 +65,3 @@ public class SettingsController implements Initializable{
 		});
 	}
 }
-/*
- * TO_DO
- * adding default choice on bar? current?
- * adding color bars
- * checking colors are different' else alert and return
- * close option?
- * writing saved choices to  file
- * nice background and style:)
-*/
