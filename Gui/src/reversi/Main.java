@@ -1,7 +1,6 @@
 package reversi;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -10,18 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-
+/*
+ * This application is a reversi game.
+ * User can choose to set the settings (players colors and board size,
+ * or he can choose to start a new reversi game.
+ */
 public class Main extends Application {
 	private Button btnStart, btnSettings, btnMenu;
     private Label lblMenu;
@@ -54,8 +49,6 @@ public class Main extends Application {
         btnSettings.setStyle("-fx-background-color: transparent;");
         btnSettings.setOnAction(e-> ButtonClicked(e));
         spSettings.getChildren().addAll(ivSettings, btnSettings);
-//        btnSettings = new Button("settings");
-//        btnSettings.setOnAction(e-> ButtonClicked(e));
 
         //add everything to pane and organize menu
         lblMenu = new Label("");
@@ -77,15 +70,19 @@ public class Main extends Application {
         btnMenu = new Button("quit");
         btnMenu.setOnAction(e-> ButtonClicked(e));
         
+        //opening window and starting menu
         sceneMenu = new Scene(pane, 800, 600);
         primaryStage.setTitle("Reversi");
 		primaryStage.setScene(sceneMenu);
 		primaryStage.show();
 	}
 	
+	/*
+	 * handles an event of a menu related button being pressed
+	 */
 	public void ButtonClicked(ActionEvent e) {
 		try {
-	        if (e.getSource() == btnStart) {
+	        if (e.getSource() == btnStart) {//loading starting new game
 				Pane root = (Pane)FXMLLoader.load(getClass().getResource("FXML.fxml"));
 				root.getChildren().add(btnMenu);
 				btnMenu.relocate(400, 460);
@@ -94,7 +91,7 @@ public class Main extends Application {
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	            theStage.setScene(scene);
 	        }
-	        else if (e.getSource() == btnSettings) {
+	        else if (e.getSource() == btnSettings) {//opening settings window
 				GridPane rootSetting = (GridPane)FXMLLoader.load(getClass().getResource("SettingsFXML.fxml"));
 		       	Scene sceneSetting = new Scene(rootSetting, 400, 350);
 		       	Stage stage = new Stage();
@@ -102,12 +99,11 @@ public class Main extends Application {
 		       	stage.setScene(sceneSetting);
 		       	stage.show();
 	        }
-	        if (e.getSource() == btnMenu) {
+	        if (e.getSource() == btnMenu) {//returning to menu when another scene quits
 	        	theStage.setScene(sceneMenu);
 	    		theStage.show();
 	        }
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	    }
