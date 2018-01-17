@@ -9,14 +9,13 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class FXMLController implements Initializable{
 
 	@FXML
-	private HBox root;
+	private Pane root;
 	
-	@FXML
 	private GameFlow game;
 	
 	private String opening;
