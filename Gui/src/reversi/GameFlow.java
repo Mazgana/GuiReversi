@@ -57,6 +57,7 @@ public class GameFlow extends GridPane {
 
 	//runs basic game loop.
 	public void run(String firstColor, String secondColor) throws IOException {
+		
 		//initializing board and starting.
 		  this.board.initialize(firstColor, secondColor, this);
 		  showScores();
