@@ -130,7 +130,7 @@ public class GameFlow extends GridPane {
 	public void showScores() {
 		this.getChildren().remove(this.scores);
 		this.scores.setFont(Font.font ("Purisa", 16));
-		this.add(this.scores, this.board.getWidth() + 1, 1);
+		this.add(this.scores, this.board.getWidth() + 1, 1, this.board.getWidth() + 1, 5);
 		this.scores.setText(" Current player: " + this.curr.getColor() + "\n " + this.blackPlayer.getColor() + " player score: " 
 						+ this.board.getBlackScore() + "\n " + this.whitePlayer.getColor() + " player score: " + this.board.getWhiteScore());
 	}

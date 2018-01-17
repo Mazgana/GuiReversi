@@ -43,9 +43,4 @@ public class SettingsWriter {
 			}
 		}
 	}
-		
-//      clear file then:
-//		writing settings to file unless null, in which case default!
-// 		split size string
-	
 }
